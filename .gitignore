@@ -50,3 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# rpi capture
+build
+build/
+.vscode
+temp
+temp/
+CMakeFiles
+CMakeFiles/
+
