@@ -17,7 +17,7 @@ endif()
 #--------------------------------------------------------------------------
 if(${PLATFORM_IPC_MEARI_RPI_INDOOR} AND ${PLATFORM_IPC_MEARI_OTHER_OUTDOOR})
         message(FATAL_ERROR "Please choose only one option building for Indoor or Outdoor")
-
+endif()
 
 # Toolchain for RPI
 if(${PLATFORM_IPC_MEARI_RPI_INDOOR})
