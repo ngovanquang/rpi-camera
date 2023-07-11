@@ -19,9 +19,11 @@ echo "FW Name: $fw_name"
 echo "FW Version: $fw_version"
 
 cd ..
+rm -rf ./build/*
+
 cmake -S . -Bbuild -DIPC_TYPE=$type && cmake --build build
 
-if [ -f "./build/h264capture" ]; then
+if [ -f "./build/h264capture" ] || [ -f "./build/srt_demo" ]; then
 
     echo ""
     echo "Build for $type: SUCCESS"
