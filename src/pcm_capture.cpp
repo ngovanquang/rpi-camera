@@ -237,26 +237,27 @@ int start_pcm_capture(pcm_context_s *ctx, void *param)
 
 int start_pcm_playback(pcm_context_s *ctx, char *data, uint16_t data_len)
 {
-    int len = data_len;
-    int cnt = 0;
-    int err;
-    while (len != 0)
-    {
-        memcpy(ctx->data, data + (cnt * (ctx->data_element * 2)), (ctx->data_element * 2));
-        len -= (ctx->data_element * 2);
-        printf("LEN: %d\n", len);
-        cnt++;
-        // printf("frames: %d\n", ctx->pcm_playback_context->frames);
-        err = snd_pcm_writei(ctx->handle, ctx->data, (ctx->pcm_playback_context->frames));
-        if (err == -EPIPE)
-        {
-            LOG_ERROR("Buffer underrun occurred\n");
-            snd_pcm_prepare(ctx->handle);
-        }
-        else if (err < 0)
-        {
-            LOG_ERROR("Error writing PCM data: %s", snd_strerror(err));
-            break;
-        }
-    }
+    // int len = data_len;
+    // int cnt = 0;
+    // int err;
+    // while (len != 0)
+    // {
+    //     memcpy(ctx->data, data + (cnt * (ctx->data_element * 2)), (ctx->data_element * 2));
+    //     len -= (ctx->data_element * 2);
+    //     printf("LEN: %d\n", len);
+    //     cnt++;
+    //     // printf("frames: %d\n", ctx->pcm_playback_context->frames);
+    //     err = snd_pcm_writei(ctx->handle, ctx->data, (ctx->pcm_playback_context->frames));
+    //     if (err == -EPIPE)
+    //     {
+    //         LOG_ERROR("Buffer underrun occurred\n");
+    //         snd_pcm_prepare(ctx->handle);
+    //     }
+    //     else if (err < 0)
+    //     {
+    //         LOG_ERROR("Error writing PCM data: %s", snd_strerror(err));
+    //         break;
+    //     }
+    // }
+    return 0;
 }

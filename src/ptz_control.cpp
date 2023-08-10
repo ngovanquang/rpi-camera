@@ -13,7 +13,6 @@ static int open_ptzdevice(void)
     if (fd < 0)
     {
         LOG_ERROR("Can't open the device file: %s", DEVICE_NODE);
-        exit(1);
     }
     return fd;
 }
@@ -33,6 +32,7 @@ void control_ptz_stop(void)
 void control_ptz_reset(void)
 {
     int fd = open_ptzdevice();
+    if (fd < 0) return;
     int ret = ioctl(fd, MOTOR_RESET);
     close_ptzdevice(fd);
 }
@@ -40,6 +40,7 @@ void control_ptz_reset(void)
 void control_ptz_get_status(struct motor_message_t *msg)
 {
     int fd = open_ptzdevice();
+    if (fd < 0) return;
     int ret = ioctl(fd, MOTOR_GET_STATUS, msg);
     if (ret >= 0)
     {
@@ -57,6 +58,7 @@ void control_ptz_get_status(struct motor_message_t *msg)
 void control_ptz_move(struct motors_steps_t *relative_position)
 {
     int fd = open_ptzdevice();
+    if (fd < 0) return;
     int ret = ioctl(fd, MOTOR_MOVE, relative_position);
     close_ptzdevice(fd);
 }
@@ -64,6 +66,7 @@ void control_ptz_move(struct motors_steps_t *relative_position)
 void control_ptz_speed(int *speed)
 {
     int fd = open_ptzdevice();
+    if (fd < 0) return;
     int ret = ioctl(fd, MOTOR_SPEED, speed);
     close_ptzdevice(fd);
 }

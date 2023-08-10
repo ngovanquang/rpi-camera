@@ -1,7 +1,7 @@
 #ifndef __PCM_CAPTURE__
 #define __PCM_CAPTURE__
 
-#include <alsa/asoundlib.h>
+#include "alsa/asoundlib.h"
 
 #define PCM_DEFAULT_DEVICE "default"
 
