@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "logger.h"
 
-media_frame_s *create_media_frame(int frame_type, int frame_number, char *frame_data, int data_size)
+media_frame_s *create_media_frame(media_frame_e frame_type, int frame_number, char *frame_data, int data_size)
 {
     media_frame_s *new_frame = (media_frame_s *)malloc(sizeof(media_frame_s));
     if (new_frame == NULL)

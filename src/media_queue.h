@@ -9,7 +9,7 @@
 
 typedef struct media_frame_s
 {
-    int frame_type;
+    media_frame_e frame_type;
     int frame_number;
     char *frame_data;
     int frame_size;
@@ -30,7 +30,7 @@ typedef struct media_queue_s
     pthread_mutex_t lock;
 } media_queue_s;
 
-media_frame_s *create_media_frame(int frame_type, int frame_number, char *frame_data, int data_size);
+media_frame_s *create_media_frame(media_frame_e frame_type, int frame_number, char *frame_data, int data_size);
 
 // Function to create an empty queue
 media_queue_s *create_media_queue();
