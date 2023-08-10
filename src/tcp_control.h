@@ -5,26 +5,36 @@
 
 #define BUFFER_SIZE (100)
 
-typedef int(*handle_control_message_t)(const char* cmd, int len);
+#define TCP_RETURN_OK (0)
+#define TCP_RETURN_FAILED (-1)
+#define MIN_PORT (1000)
+#define MAX_PORT (50000)
 
-typedef struct tcp_control_t
+typedef enum
 {
-    int tcp_control_socket;
-    int tcp_listen_socket;
-    char* ip_address;
-    int ip_port;
-    char* control_message;
-    struct sockaddr_in client_address;
-    int addr_len;
-    handle_control_message_t handle_message_cb;
-} tcp_control_t;
+    TCP_STATE_IDLE = 0,
+    TCP_STATE_LISTEN,
+    TCP_STATE_ACCEPTED,
+    TCP_STATE_DISCONNECTED
+} tcp_state_e;
 
-tcp_control_t* allocate_tcp_context(void);
-void init_tcp_connection(tcp_control_t* ctx);
-void start_tcp_connection(tcp_control_t* ctx);
-int recv_control_message(tcp_control_t* ctx);
-void stop_tcp_connection(tcp_control_t* ctx);
-void destroy_tcp_connection(tcp_control_t* ctx);
+typedef struct tcp_context_s *tcp_context;
 
+tcp_context get_tcp_instance(void);
+
+void change_tcp_to_idle_state(tcp_context ctx);
+int change_tcp_to_listen_state(tcp_context ctx);
+int change_tcp_to_accepted_state(tcp_context ctx);
+void destroy_tcp_control(tcp_context ctx);
+
+int set_tcp_ipaddress(tcp_context ctx, char *ipaddress);
+int get_tcp_ipaddress(tcp_context ctx, char **ipaddress, int *ipaddress_len);
+
+int set_tcp_ipport(tcp_context ctx, int ipport);
+int get_tcp_iport(tcp_context ctx, int *ipport);
+
+int recv_control_message(tcp_context ctx, char **buffer, int *buffer_len);
+
+int get_tcp_state(tcp_context ctx, tcp_state_e *tcp_state);
 
 #endif
