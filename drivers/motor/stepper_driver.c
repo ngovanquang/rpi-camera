@@ -165,7 +165,7 @@ static void motor_stepper(int steps, int delay, int clockwise, enum motor_type m
 		stepper_dev.cur_steps->y += steps * clockwise;
 	}
 
-	// reset_gpio_pins(motor);
+	reset_gpio_pins(motor);
 }
 
 static void stepper_motor_stop(void)
